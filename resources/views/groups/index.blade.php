@@ -41,7 +41,11 @@
                                     <td class="text-center">
                                     <a href="{{ route('groups.edit', $group->id) }}" class="btn btn-sm btn-primary">EDIT</a>
 
-                                      <a href="/groups/des/{{$group->id}}">Hapus</a>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('groups.destroy', $group->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @empty

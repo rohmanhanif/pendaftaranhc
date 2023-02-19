@@ -11,7 +11,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label class="font-weight-bold">NISN</label>
-                            <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" value="{{ old('number', $group->number) }}" placeholder="Masukkan nomor NISN">
+                            <input type="text" class="form-control @error('number') is-invalid @enderror" name="user_id" value="{{ old('number', $group->number) }}" placeholder="Masukkan nomor NISN">
 
                             <!-- error message untuk number -->
                             @error('number')

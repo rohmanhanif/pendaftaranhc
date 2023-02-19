@@ -25,7 +25,7 @@
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold">USER</label>
-                                <input type="text" class="form-control @error('NISN') is-invalid @enderror" name="number" value="{{ old('numbera') }}" placeholder="Masukkan user">
+                                <input type="text" class="form-control @error('NISN') is-invalid @enderror" name="user_id" value="{{ old('numbera') }}" placeholder="Masukkan user">
 
                                 <!-- error message untuk title -->
                                 @error('number')

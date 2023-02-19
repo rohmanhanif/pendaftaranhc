@@ -85,9 +85,6 @@ class GroupController extends Controller
     public function edit(Group $group)
 {
     // Autentikasi Edit dan Delete Data
-    if (auth()->user()->id != $group->user_id) {
-        return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
-    }
     return view('groups.edit', compact('group'));
 }
 
@@ -109,14 +106,14 @@ public function update(Request $request, Group $group)
 
     
 
-    public function destroy( $group)
+    public function destroy(Group $group)
     {
         // Autentikasi Edit dan Delete Data
-        if (auth()->user()->id != $group->user_id) {
-            return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
-        }
+        // if (auth()->user()->id != $group->user_id) {
+        //     return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
+        // }
         // Delete Data
-        Group::destroy($group);
+        $group->delete();
 
         //redirect to index
         return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Dihapus!']);
