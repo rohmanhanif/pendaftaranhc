@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     use HasFactory;
-
-    public function group(){
-        return $this->belongsTo(Group::class,'group_id');
-    }
-    public function presences(){
-        return $this->hasMany(Presence::class,'schedule_id');
-    }
+    protected $fillable = [
+        'group_id',
+        'user_id',
+        'note',
+        'time_start',
+        'time_end'
+    ];
 }

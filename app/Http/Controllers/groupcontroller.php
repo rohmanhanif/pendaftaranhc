@@ -2,101 +2,123 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller as ControllersController;
-use App\Models\User;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
-class groupcontroller extends ControllersController
+
+class GroupController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * index
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function index()
     {
-        return view('students.group',[
-            'group'=> Group::all()
-        ]);
+        //get groups
+
+        // $groups = Group::latest()->paginate(5);
+        // $groups = Group::with('users')->get();
+
+
+        $groups = DB::table('groups')
+            ->join('users', 'users.id', '=', 'groups.user_id')
+            ->select('groups.*', 'users.name as user_name')
+            ->get();
+
+        //render view with groups
+        return view('groups.index', compact('groups'));
+    }
+
+    public function show($id)
+    {
+        // $group_id = $request->query('group_id');
+        $members = DB::table('members')->where('group_id', $id)->get();
+
+        // Render View with member
+        return view('groups.show', compact('members'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * create
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
-       return view('students.groupadd',[
-        'user'=> User::all()
-       ]);
+        $group = User::all();
+        return view('groups.create', compact('group'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * store
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
     public function store(Request $request)
     {
-        
-       $request->validate([
-        'user_id'=>'required',
-        'group'=>'required'
-       ]);
+        //validate form
+        $request->validate([
+            'user_id'     => 'required',
+            'name'     => 'required',
+        ]);
 
-       Group::create([
-        'name'=>$request->group,
-        'user_id'=>$request->user_id,
-       ]);
-       return redirect()->route('groups.index')->with('success','success add the group');
+        //create post
+        Group::create([
+            'user_id'   => $request->user_id,
+            'name'      => $request->name
+        ]);
+
+        //redirect to index
+        return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * edit
+     * 
+     * @param  mixed $group
+     * @return void
      */
-    public function show($id)
-    {
-        //
+    public function edit(Group $group)
+{
+    // Autentikasi Edit dan Delete Data
+    if (auth()->user()->id != $group->user_id) {
+        return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
     }
+    return view('groups.edit', compact('group'));
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+public function update(Request $request, Group $group)
+{
+    //validate form
+    $request->validate([
+        'name'      => 'required|min:5',
+    ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    //update Group
+    $group->update([
+        'name'      => $request->name
+    ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    //redirect to index
+    return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Diubah!']);
+}
+
+    
+
+    public function destroy( $group)
     {
-        //
+        // Autentikasi Edit dan Delete Data
+        if (auth()->user()->id != $group->user_id) {
+            return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
+        }
+        // Delete Data
+        Group::destroy($group);
+
+        //redirect to index
+        return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

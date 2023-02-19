@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/students', \App\Http\Controllers\StudentController::class);
-Route::resource('/groups', groupcontroller::class);
+Route::resource('/groups', \App\Http\Controllers\groupcontroller::class);
 
 });
 Auth::routes();
@@ -33,3 +33,4 @@ Auth::routes();
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+

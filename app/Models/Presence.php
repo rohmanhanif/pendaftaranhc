@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Presence extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'schedule_id', 'student_id', 'presence', 'note'
+    ];
 
-    public function schedule(){
-        return $this->belongsTo(Schedule::class,'schedule_id');
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
     }
-    public function student(){
-        return $this->belongsTo(Student::class,'student_id');
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
     }
 }

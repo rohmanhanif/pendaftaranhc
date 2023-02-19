@@ -10,48 +10,7 @@
 
 <body>
 
-    <div class="container mt-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">no</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">NamaSiswa</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Nomor HP</th>
-                    <th scope="col">Gender</th>
-                   
-                    <th scope="col">Email</th>
-                    <th scope="col">File</th>
-
-                    
-                </tr>
-            </thead>
-            <tbody>
-               
-                    @foreach($syllabus as $p)
-
-                    <tr>
-                        <td>
-                            <a href="http://localhost/idbc/edit.php?id={{ $p->no }}">
-                                Edit
-                            </a>
-                        </td>
-                        <td>{{ $p->no }}</td>
-                        <td>{{ $p->nama }}</td>
-                        <td>{{ $p->alamat }}</td>
-                        <td>{{ $p->nohp }}</td>
-                        <td>{{ $p->jenkel }}</td>
-                        
-                        <td>{{ $p->email }}</td>
-                        <td><img class="img-thumbnail" width="100" src="assets/{{ $p->foto }}" /></td>
-
-                        @endforeach
-                        
-                    
-            </tbody>
-        </table>
-    </div>
+    
 
 
 
