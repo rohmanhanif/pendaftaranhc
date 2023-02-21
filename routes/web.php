@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\groupcontroller;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -21,8 +21,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/students', \App\Http\Controllers\StudentController::class);
-Route::resource('/groups', \App\Http\Controllers\groupcontroller::class);
-Route::resource('/members', \App\Http\Controllers\membercontroller::class);
+
 
 });
 Auth::routes();
@@ -34,5 +33,13 @@ Auth::routes();
     
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', function ()
+{
+    return view('layouts.admin');
+});
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
+Route::resource('/group', 'App\Http\Controllers\GroupController');
+Route::resource('/member', 'App\Http\Controllers\MemberController');
+Route::resource('/schedule', 'App\Http\Controllers\ScheduleController');

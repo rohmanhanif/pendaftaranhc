@@ -1,10 +1,9 @@
 <?php
-
+use illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +13,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->timestamps();
-        });
+            $table->integer('group_id')->nullable();
+            $table->integer('student_id')->nullable();
+            });
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::drop('members');
     }
-};
+}

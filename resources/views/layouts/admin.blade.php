@@ -131,7 +131,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="members\">              
+            <a class="nav-link" href="member\">              
               <i class="fa-solid fa-user"></i>
               Members
             </a>

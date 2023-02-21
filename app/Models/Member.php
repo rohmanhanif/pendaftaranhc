@@ -2,25 +2,38 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class member extends Model
+class Member extends Model
 {
-    use HasFactory;
-    
     /**
-     * fillable
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'members';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'group_id',
-        'student_id',
-    ];
+    protected $fillable = ['group_id', 'student_id'];
+
     public function group()
     {
-      return $this->BelongsTo(Group::class);
+        return $this->belongsTo('App\Models\Group');
     }
+    public function student()
+    {
+        return $this->belongsTo('App\Models\Student');
+    }
+    
 }

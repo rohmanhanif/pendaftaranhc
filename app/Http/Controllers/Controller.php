@@ -10,14 +10,5 @@ use  Illuminate\support\facades\DB;
 
 class Controller extends BaseController
 {
-    // use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function index()
-    {
-        // mengambil data dari table syllabus
-    	$syllabus = DB::table('datasiswa')->get();
- 
-    	// mengirim data syllabus ke view index
-    	return view('welcome', ['syllabus' => $syllabus]);
-    }
+    
 }
