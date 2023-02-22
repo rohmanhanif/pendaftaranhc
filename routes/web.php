@@ -43,3 +43,5 @@ Route::get('/home', function ()
 Route::resource('/group', 'App\Http\Controllers\GroupController');
 Route::resource('/member', 'App\Http\Controllers\MemberController');
 Route::resource('/schedule', 'App\Http\Controllers\ScheduleController');
+Route::resource('/presence', 'App\Http\Controllers\presenceController');
+Route::get('/groups/{id}/attendances', ['App\Http\Controllers\GroupController','attendances']);

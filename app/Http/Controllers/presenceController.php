@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Member;
+use App\Models\presence;
 use Illuminate\Http\Request;
 
-class MemberController extends Controller
+class presenceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +21,16 @@ class MemberController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $member = Member::where('group_id', 'LIKE', "%$keyword%")
+            $presence = presence::where('schedule_id', 'LIKE', "%$keyword%")
                 ->orWhere('student_id', 'LIKE', "%$keyword%")
+                ->orWhere('presence', 'LIKE', "%$keyword%")
+                ->orWhere('note', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $member = Member::latest()->paginate($perPage);
+            $presence = presence::latest()->paginate($perPage);
         }
 
-        return view('member.index', compact('member'));
+        return view('presence.index', compact('presence'));
     }
 
     /**
@@ -38,7 +40,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('member.create');
+        return view('presence.create');
     }
 
     /**
@@ -53,9 +55,9 @@ class MemberController extends Controller
         
         $requestData = $request->all();
         
-        Member::create($requestData);
+        presence::create($requestData);
 
-        return redirect('/member')->with('flash_message', 'Member added!');
+        return redirect('/presence')->with('flash_message', 'presence added!');
     }
 
     /**
@@ -67,9 +69,9 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::findOrFail($id);
+        $presence = presence::findOrFail($id);
 
-        return view('member.show', compact('member'));
+        return view('presence.show', compact('presence'));
     }
 
     /**
@@ -81,9 +83,9 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $member = Member::findOrFail($id);
+        $presence = presence::findOrFail($id);
 
-        return view('member.edit', compact('member'));
+        return view('presence.edit', compact('presence'));
     }
 
     /**
@@ -99,10 +101,10 @@ class MemberController extends Controller
         
         $requestData = $request->all();
         
-        $member = Member::findOrFail($id);
-        $member->update($requestData);
+        $presence = presence::findOrFail($id);
+        $presence->update($requestData);
 
-        return redirect('/member')->with('flash_message', 'Member updated!');
+        return redirect('/presence')->with('flash_message', 'presence updated!');
     }
 
     /**
@@ -114,8 +116,8 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        Member::destroy($id);
+        presence::destroy($id);
 
-        return redirect('/member')->with('flash_message', 'Member deleted!');
+        return redirect('/presence')->with('flash_message', 'presence deleted!');
     }
 }

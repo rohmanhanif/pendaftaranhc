@@ -125,7 +125,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="groups\">              
+            <a class="nav-link" href="group\">              
               <i class="fa-solid fa-user"></i>
               Groups
             </a>
@@ -136,7 +136,7 @@
               Members
             </a>
           <li class="nav-item">
-            <a class="nav-link" href="presences\">              
+            <a class="nav-link" href="presence\">              
               <i class="fa-solid fa-user"></i>
               Presences
             </a>

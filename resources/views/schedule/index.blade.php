@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -29,14 +29,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Group Id</th><th>User Id</th><th>Mapel</th><th>timestart</th><th>timeend</th><th>Actions</th>
+                                        <th>No</th><th>Group </th><th>Dosen</th><th>Mapel</th><th>timestart</th><th>timeend</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($schedule as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->group_id }}</td><td>{{ $item->user_id }}</td><td>{{ $item->note }}</td><td>{{date("H-i-s",strtotime($item->time_start_at))}}</td><td>{{date("H-i-s",strtotime($item->time_end_at))}}</td>
+                                        <td>{{ $item->group->name }}</td><td>{{ $item->user->name }}</td><td>{{ $item->note }}</td><td>{{date("H-i-s",strtotime($item->time_start_at))}}</td><td>{{date("H-i-s",strtotime($item->time_end_at))}}</td>
                                         <td>
                                             <a href="{{ url('/schedule/' . $item->id) }}" title="View Schedule"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/schedule/' . $item->id . '/edit') }}" title="Edit Schedule"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
