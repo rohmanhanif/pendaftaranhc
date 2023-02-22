@@ -47,7 +47,7 @@
                                 </thead>
                                 <tbody>
                                     
-                                <form method="POST" action="{{ url('/groups/' . $group->id . '/attendances_store') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                                <form method="POST" action="{{route('presence.store')}}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
  
                                 @foreach($group->member as $item)
@@ -86,6 +86,7 @@
                                 <input type="hidden" name="group_id" value="{{ $group->id }}">
                                 <label for="name" class="control-label">{{ 'Note' }}</label>
                                 <input type="text" class="form-control" name="note">
+                                <input type="hidden" name="user_id" value="{{ $group->user->id }}">
                             </div>
 
 

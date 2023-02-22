@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\presence;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class presenceController extends Controller
@@ -52,11 +53,21 @@ class presenceController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        presence::create($requestData);
-
+        // dd($request->all());
+        Schedule::create([
+            'group_id'=> $request->group_id,
+            'user_id'=> $request->user_id,
+            'note'=> $request->note,
+        ]);
+     foreach ($request->items as  $value) {
+        // dd($value['absensi']);
+       presence::create([
+        'student_id'=>$value['student_id'],
+        'presence'=>$value['absensi'],
+        'note'=>$value['note'],
+        'schedule'=>$request->note
+       ]);
+     }
         return redirect('/presence')->with('flash_message', 'presence added!');
     }
 

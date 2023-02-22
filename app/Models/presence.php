@@ -25,7 +25,7 @@ class presence extends Model
      *
      * @var array
      */
-    protected $fillable = ['schedule_id', 'student_id', 'presence', 'note'];
+    protected $fillable = ['schedule', 'student_id', 'presence', 'note'];
 
     public function schedule()
     {
