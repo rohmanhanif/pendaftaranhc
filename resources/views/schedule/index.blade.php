@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            
+
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">Schedule</div>
@@ -36,7 +36,11 @@
                                 @foreach($schedule as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->group->name }}</td><td>{{ $item->user->name }}</td><td>{{ $item->note }}</td><td>{{date("H-i-s",strtotime($item->time_start_at))}}</td><td>{{date("H-i-s",strtotime($item->time_end_at))}}</td>
+                                        <td>{{ $item->group->name }}</td>
+                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->note }}</td>
+                                        <td>{{date("H-i-s",strtotime($item->time_start_at))}}</td>
+                                        <td>{{date("H-i-s",strtotime($item->time_end_at))}}</td>
                                         <td>
                                             <a href="{{ url('/schedule/' . $item->id) }}" title="View Schedule"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/schedule/' . $item->id . '/edit') }}" title="Edit Schedule"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

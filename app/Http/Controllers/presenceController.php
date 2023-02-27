@@ -54,18 +54,17 @@ class presenceController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        Schedule::create([
+        $Schedule=Schedule::create([
             'group_id'=> $request->group_id,
             'user_id'=> $request->user_id,
             'note'=> $request->note,
         ]);
      foreach ($request->items as  $value) {
-        // dd($value['absensi']);
        presence::create([
         'student_id'=>$value['student_id'],
         'presence'=>$value['absensi'],
         'note'=>$value['note'],
-        'schedule'=>$request->note
+        'schedule_id' => $Schedule->id
        ]);
      }
         return redirect('/presence')->with('flash_message', 'presence added!');
@@ -109,9 +108,9 @@ class presenceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $presence = presence::findOrFail($id);
         $presence->update($requestData);
 

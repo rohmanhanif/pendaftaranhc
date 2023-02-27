@@ -96,7 +96,7 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
           @csrf
         </form>
-        
+
       </div>
     </div>
   </header>
@@ -119,30 +119,30 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="students\">              
+            <a class="nav-link" href="students\">
               <i class="fa-solid fa-user"></i>
               Students
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="group\">              
+            <a class="nav-link" href="group\">
               <i class="fa-solid fa-user"></i>
               Groups
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="member\">              
+            <a class="nav-link" href="member\">
               <i class="fa-solid fa-user"></i>
               Members
             </a>
           <li class="nav-item">
-            <a class="nav-link" href="presence\">              
+            <a class="nav-link" href="presence\">
               <i class="fa-solid fa-user"></i>
               Presences
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="schedule\">              
+            <a class="nav-link" href="schedule\">
               <i class="fa-solid fa-user"></i>
               Schedules
             </a>

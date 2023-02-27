@@ -25,15 +25,15 @@ class presence extends Model
      *
      * @var array
      */
-    protected $fillable = ['schedule', 'student_id', 'presence', 'note'];
+    protected $fillable = ['schedule_id', 'student_id', 'presence', 'note'];
 
     public function schedule()
     {
-        return $this->belongsTo('App\Models\Scedule');
+        return $this->belongsTo('App\Models\Schedule');
     }
     public function student()
     {
         return $this->belongsTo('App\Models\Student');
     }
-    
+
 }
